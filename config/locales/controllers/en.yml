@@ -188,6 +188,10 @@ en:
     clear:
       error: There were problems deleting your history. Please try again later.
       success: Your history is now cleared.
+  redirect:
+    no_url: "What URL did you want to look up?"
+    redirected_from: "You have been redirected here from %{original_url}. Please update the original link if possible!"
+    no_work_found: "We could not find a work imported from that URL, sorry!"
   related_works:
     index:
       page_title: "%{login} - Related Works"

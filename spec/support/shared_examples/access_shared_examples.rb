@@ -33,6 +33,25 @@ shared_examples "an action only authorized admins can access" do |authorized_rol
   end
 end
 
+shared_examples "an action logged-out users cannot access" do |redirect_destination_access_denied: new_user_session_path|
+  it "redirects with an error" do
+    subject
+
+    it_redirects_to_with_error(redirect_destination_access_denied, "Sorry, you don't have permission to access the page you were trying to reach. Please log in.")
+  end
+end
+
+shared_examples "an action logged-in users without roles cannot access" do |redirect_destination_access_denied: user_path(user)|
+  before { fake_login_known_user(user) }
+  let(:user) { create(:user) }
+
+  it "redirects with an error" do
+    subject
+
+    it_redirects_to_with_error(redirect_destination_access_denied, "Sorry, you don't have permission to access the page you were trying to reach.")
+  end
+end
+
 shared_examples "denies access for work that isn't visible to user" do
   shared_examples "denies access to random user" do
     it "allows access for work creator" do
