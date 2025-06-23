@@ -3,13 +3,11 @@ class RedirectController < ApplicationController
 
   def check_permission
     return if params[:original_url].present?
-    return if user_has_roles?(Admin::REDIRECT_ACCESS_ROLES) || current_user.is_archivist?
-
-    current_user.logged_in_as_admin? ? redirect_to(admin_only_access_denied) : redirect_to(access_denied)
-  end
-
-  def index
-    do_redirect
+    if logged_in_as_admin?
+      (admin_only_access_denied and return) unless user_has_roles?(Admin::REDIRECT_ACCESS_ROLES)
+    else
+      (access_denied and return) unless current_user&.is_archivist?
+    end
   end
 
   def do_redirect
@@ -20,15 +18,15 @@ class RedirectController < ApplicationController
       @work = Work.find_by_url(url)
       if @work
         flash[:notice] = t(".redirected_from", original_url: url)
-        redirect_to work_path(@work) and return
+        redirect_to(work_path(@work)) and return
       else
         flash[:error] = t(".no_work_found")
       end
     end
-    redirect_to redirect_path
+    redirect_to(redirect_path) and return
   end
 
   def show
-    redirect_to action: :do_redirect, original_url: params[:original_url] and return
+    redirect_to(action: :do_redirect, original_url: params[:original_url])
   end
 end
