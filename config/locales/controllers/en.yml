@@ -300,17 +300,23 @@ en:
       success: Your history is now cleared.
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     index:
       history_page_title: "%{username} - History"
       marked_for_later_page_title: "%{username} - Marked for Later"
 =======
+=======
+>>>>>>> refs/remotes/origin/AO3-5891
   redirect:
     no_url: "What URL did you want to look up?"
     redirected_from: "You have been redirected here from %{original_url}. Please update the original link if possible!"
     no_work_found: "We could not find a work imported from that URL, sorry!"
+<<<<<<< HEAD
 >>>>>>> e6be860e7 (initial commit)
 =======
 >>>>>>> 802873ceb (commit changes so I can checkout master)
+=======
+>>>>>>> refs/remotes/origin/AO3-5891
   related_works:
     index:
       page_title: "%{login} - Related Works"
